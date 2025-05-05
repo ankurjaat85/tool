@@ -1,12 +1,42 @@
-def emi_calculator(principal, rate, tenure):
-    monthly_rate = rate / (12 * 100)  # Convert annual interest rate to monthly rate
-    emi = (principal * monthly_rate * ((1 + monthly_rate) ** tenure)) / (((1 + monthly_rate) ** tenure) - 1)
-    return round(emi, 2)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>EMI Calculator</h2>
+        <label for="principal">Loan Amount:</label>
+        <input type="number" id="principal" placeholder="Enter Loan Amount">
+        
+        <label for="rate">Annual Interest Rate (%):</label>
+        <input type="number" id="rate" placeholder="Enter Interest Rate">
 
-# Example usage:
-principal = float(input("Enter loan amount: "))
-rate = float(input("Enter annual interest rate (in %): "))
-tenure = int(input("Enter loan tenure (in months): "))
+        <label for="tenure">Loan Tenure (months):</label>
+        <input type="number" id="tenure" placeholder="Enter Tenure in Months">
 
-emi = emi_calculator(principal, rate, tenure)
-print(f"Your EMI is: {emi}")
+        <button onclick="calculateEMI()">Calculate EMI</button>
+        
+        <h3>Your EMI: <span id="result"></span></h3>
+    </div>
+
+    <script>
+        function calculateEMI() {
+            let principal = parseFloat(document.getElementById('principal').value);
+            let rate = parseFloat(document.getElementById('rate').value) / 12 / 100;
+            let tenure = parseInt(document.getElementById('tenure').value);
+
+            let emi = (principal * rate * Math.pow(1 + rate, tenure)) / (Math.pow(1 + rate, tenure) - 1);
+            
+            document.getElementById('result').innerText = isNaN(emi) ? "Invalid Input" : emi.toFixed(2);
+        }
+    </script>
+</body>
+</html>
