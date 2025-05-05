@@ -1,0 +1,12 @@
+def emi_calculator(principal, rate, tenure):
+    monthly_rate = rate / (12 * 100)  # Convert annual interest rate to monthly rate
+    emi = (principal * monthly_rate * ((1 + monthly_rate) ** tenure)) / (((1 + monthly_rate) ** tenure) - 1)
+    return round(emi, 2)
+
+# Example usage:
+principal = float(input("Enter loan amount: "))
+rate = float(input("Enter annual interest rate (in %): "))
+tenure = int(input("Enter loan tenure (in months): "))
+
+emi = emi_calculator(principal, rate, tenure)
+print(f"Your EMI is: {emi}")
